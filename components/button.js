@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
 export const TimerButton = (props) => {
+  alert(props.mins);
   return (
     <View style={{ ...styles.timerButton, backgroundColor: `${props.color}` }}>
       <TouchableWithoutFeedback>
-        <Text style={styles.timeText}>3:00</Text>
+        <Text style={styles.timeText}>54:00</Text>
       </TouchableWithoutFeedback>
     </View>
   );
