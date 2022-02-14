@@ -5,7 +5,7 @@ export const TimerButton = (props) => {
   return (
     <View style={{ ...styles.timerButton, backgroundColor: `${props.color}` }}>
       <TouchableWithoutFeedback>
-        <Text style={styles.timeText}>
+        <Text style={{ ...styles.timeText, color: `${props.fontc}` }}>
           {props.h == 0
             ? `${props.m}:${props.s}`
             : `${props.h}:${props.m}:${props.s}`}
@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   timeText: {
-    color: '#fff',
     fontSize: 60
   }
 });

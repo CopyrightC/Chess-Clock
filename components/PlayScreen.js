@@ -2,19 +2,39 @@ import React from 'react';
 import { TimerButton } from './button';
 import { StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
 export const PlayScreen = () => {
-  const [[hrs, mins, secs], setTime] = React.useState([1, 0, 5]);
+  const [hrs, setHrs] = React.useState(0);
+  const [mins, setMins] = React.useState(10);
+  const [secs, setSecs] = React.useState(10);
   const decreaseTime = () => {
-    if (hrs === 0 && mins === 0 && secs === 0) alert('Over!');
+    if (hrs == 0 && mins == 0 && secs == 0);
     else if (mins == 0 && secs == 0) {
-      setTime([hrs - 1, 59, 59]);
-    } else if (secs === 0) {
-      setTime([hrs, mins - 1, 59]);
+      setHrs(hrs - 1);
+    } else if (secs == 0) {
+      if (parseInt(mins) === 10) {
+        setMins(`09`);
+      } else {
+        setMins(mins - 1);
+      }
+      setSecs(59);
     } else {
-      setTime([hrs, mins, secs - 1]);
+      if (parseInt(secs) < 10) {
+        if (!secs.toString().startsWith('0') || secs == '0') {
+          setSecs(`0${parseInt(secs)}`);
+        }
+        if (secs.toString().startsWith('0')) {
+          setSecs(`0${parseInt(secs) - 1}`);
+        }
+      } else {
+        if (parseInt(secs) === 10) {
+          setSecs(`09`);
+        } else {
+          setSecs(secs - 1);
+        }
+      }
     }
     if (mins < 10) {
       if (!mins.toString().startsWith('0') || mins == '0') {
-        setTime([hrs, `0${mins}`, secs]);
+        setMins(`0${mins}`);
       }
     }
   };
@@ -24,8 +44,8 @@ export const PlayScreen = () => {
   });
   return (
     <View style={styles.container}>
-      <TimerButton color="red" h={hrs} m={mins} s={secs} />
-      <TimerButton color="blue" h={hrs} m={mins} s={secs} />
+      <TimerButton color="black" fontc="white" h={hrs} m={mins} s={secs} />
+      <TimerButton color="white" fontc="black" h={hrs} m={mins} s={secs} />
     </View>
   );
 };
