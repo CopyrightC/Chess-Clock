@@ -1,18 +1,25 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, View, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 export const TimerButton = (props) => {
   // alert(props.mins);
   const [hrs, setHrs] = React.useState(0);
   const [mins, setMins] = React.useState(10);
-  const [secs, setSecs] = React.useState(`01`);
+  const [secs, setSecs] = React.useState(`02`);
   const decreaseTime = () => {
     if (hrs == 0 && mins == 0 && secs == 0);
     else if (mins == 0 && secs == 0) {
       setHrs(hrs - 1);
-    } else if (secs == 0) {
+    }
+    else if (secs == 0) {
       if (parseInt(mins) === 10) {
         setMins(`09`);
-      } else {
+      } 
+    else {
+        if (mins-1 < 10) {
+          if (!(mins-1).toString().startsWith('0') || mins-1 == '0') {
+            setMins(`0${mins}`);
+          }
+        }
         setMins(mins - 1);
       }
       setSecs(59);
@@ -39,6 +46,7 @@ export const TimerButton = (props) => {
     }
   };
   const tapped = () => {
+    console.log("tappedx")
     if (props.color == 'white' && props.prun) {
       props.psetRun(false);
     } else {
@@ -52,13 +60,11 @@ export const TimerButton = (props) => {
     }
   });
   return (
-    <View style={{ ...styles.timerButton, backgroundColor: `${props.color}` }}>
-      <TouchableWithoutFeedback onPress={() => tapped()}>
+    <TouchableOpacity style={{ ...styles.timerButton, backgroundColor: `${props.color}` }} onPress={()=>tapped()} activeOpacity={1.0}>
         <Text style={{ ...styles.timeText, color: `${props.fontc}` }}>
           {hrs == 0 ? `${mins}:${secs}` : `${hrs}:${mins}:${secs}`}
         </Text>
-      </TouchableWithoutFeedback>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -70,6 +76,6 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   timeText: {
-    fontSize: 60
-  }
+    fontSize: 60,
+  },
 });

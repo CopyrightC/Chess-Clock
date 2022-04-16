@@ -1,21 +1,41 @@
-import React from 'react';
-import Constants from 'expo-constants';
+import React,{useState,useEffect} from 'react';
+// import Constants from 'expo-constants';
 import { HomescreenButtons } from './HomescreenButtons';
-import { StyleSheet, View, ImageBackground, Dimensions } from 'react-native';
+import { StyleSheet, View, ImageBackground, Dimensions,Text } from 'react-native';
+import AppLoading from 'expo-app-loading';
+// import useFonts from './useFonts';
+import Constants from 'expo-constants';
+import * as Font from 'expo-font';
 
 export const HomeScreen = () => {
+
+  const [loaded, setLoaded] = useState(false);
+
+  const fonts = {
+    'test': require('../fonts/r.ttf'),
+  };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        await Font.loadAsync(fonts);
+        setLoaded(true);
+      } catch (err) {
+        console.log(1);
+      }
+
+    })();
+  }), [fonts];
+
+  if (!loaded) return (
+    <Text>Loading...</Text>
+  );
+
   return (
-    <View style={styles.parent}>
-      <ImageBackground
-        source={{
-          uri: 'https://images.unsplash.com/photo-1574169208507-84376144848b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=879&q=80'
-        }}
-        style={styles.bg}
-      >
+    <View style={styles.parent}>      
         <HomescreenButtons text="Start Game" />
         <HomescreenButtons text="Adjust time control" />
         <HomescreenButtons text="Settings" />
-      </ImageBackground>
     </View>
   );
 };
@@ -23,7 +43,10 @@ export const HomeScreen = () => {
 const styles = StyleSheet.create({
   parent: {
     flex: 1,
-    paddingTop: Constants.statusBarHeight
+    paddingTop: Constants.statusBarHeight,
+    alignItems:'center',
+    justifyContent : 'center',
+    backgroundColor:'#2f2a23'
   },
   bg: {
     height: Dimensions.get('window').height,
