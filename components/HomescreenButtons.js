@@ -7,7 +7,7 @@ export const HomescreenButtons = (props) => {
 
   return (
     <TouchableOpacity style={styles.btns} onPress={()=>console.log("nciencei")} activeOpacity={1.0}>
-      <Text style={{fontFamily:'test',fontSize:30}}>{props.text}</Text>
+      <Text style={{fontFamily:'test',fontSize:30,color:"#DFCCCF"}}>{props.text}</Text>
     </TouchableOpacity>
   );
 };
@@ -15,12 +15,18 @@ export const HomescreenButtons = (props) => {
 const styles = StyleSheet.create({
   btns: {
     width: '90%',
-    height: '18%',
+    height: '16%',
     alignItems: 'center',
     paddingLeft: 5,
     justifyContent: 'center',
-    backgroundColor: '#d3bc14',
+    backgroundColor: '#332323',
     marginTop: 15,
     borderRadius:5,
+    shadowColor : "#fff",
+    shadowOffset : {
+      width : 20,
+      height : 20,
+    },
+    shadowOpacity : 1,
   }
 });

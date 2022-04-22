@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
 // import Constants from 'expo-constants';
 import { HomescreenButtons } from './HomescreenButtons';
-import { StyleSheet, View, ImageBackground, Dimensions,Text } from 'react-native';
+import { StyleSheet, View, Image, Dimensions,Text } from 'react-native';
 import AppLoading from 'expo-app-loading';
 // import useFonts from './useFonts';
 import Constants from 'expo-constants';
@@ -32,7 +32,8 @@ export const HomeScreen = () => {
   );
 
   return (
-    <View style={styles.parent}>      
+    <View style={styles.parent}> 
+        <Image source={require('../images/logo.jpg')} style={styles.logo}/>     
         <HomescreenButtons text="Start Game" />
         <HomescreenButtons text="Adjust time control" />
         <HomescreenButtons text="Settings" />
@@ -46,10 +47,15 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
     alignItems:'center',
     justifyContent : 'center',
-    backgroundColor:'#2f2a23'
+    backgroundColor:'#FEAC12'
   },
   bg: {
     height: Dimensions.get('window').height,
     width: Dimensions.get('window').width
+  },
+  logo : {
+    width : '50%',
+    height : '35%',
+    backgroundColor : "#fff"
   }
 });
