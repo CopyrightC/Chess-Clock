@@ -1,19 +1,28 @@
 import React from 'react';
 import { TimerButton } from './button';
-import { StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, View,TouchableOpacity } from 'react-native';
+
 export const PlayScreen = () => {
   const [run, setRun] = React.useState(true);
-  React.useEffect(() => {
-    // console.log('h');
-    // console.log(run);
-  });
+
+  const [paused,setPaused] = React.useState(true);
+
   return (
     <View style={styles.container}>
-      <TimerButton color="black" fontc="white" prun={!run} psetRun={setRun} />
-      <TimerButton color="white" fontc="black" prun={run} psetRun={setRun} />
+      <TimerButton color="black" fontc="white" prun={!run} psetRun={setRun} paused={paused}/>
+      <TouchableOpacity style={styles.pause} activeOpacity={1.0} onPress={()=>setPaused(!paused)}>
+        {
+        !paused ?
+        <Text style={styles.text}>| |</Text>
+        :
+        <Text style={styles.text}>{`>`}</Text>
+        }
+      </TouchableOpacity>
+      <TimerButton color="white" fontc="black" prun={run} psetRun={setRun} paused={paused}/>
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -21,5 +30,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  pause:{
+    backgroundColor : "red",
+    width : 80,
+    height : 80,
+    position : 'absolute',
+    zIndex : 1,
+    borderRadius : 50,
+    alignItems : 'center',
+    justifyContent : 'center',
+  },
+  text:{
+    fontSize : 25,
   }
 });
