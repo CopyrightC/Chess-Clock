@@ -2,10 +2,11 @@ import React from 'react';
 import { TimerButton } from './button';
 import { StyleSheet, Text, View,TouchableOpacity } from 'react-native';
 
-export const PlayScreen = () => {
-  const [run, setRun] = React.useState(true);
 
-  const [paused,setPaused] = React.useState(true);
+const PlayScreen:React.FC = () => {
+
+  const [run, setRun] = React.useState<boolean>(true);
+  const [paused,setPaused] = React.useState<boolean>(true);
 
   return (
     <View style={styles.container}>
@@ -45,3 +46,5 @@ const styles = StyleSheet.create({
     fontSize : 25,
   }
 });
+
+export {PlayScreen};

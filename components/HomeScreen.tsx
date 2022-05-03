@@ -7,10 +7,15 @@ import AppLoading from 'expo-app-loading';
 import Constants from 'expo-constants';
 import * as Font from 'expo-font';
 
-export const HomeScreen = (props) => {
 
-  const [loaded, setLoaded] = useState(false);
+interface Props{
+  setScreen : React.Dispatch<React.SetStateAction<string>>;
+}
 
+const HomeScreen:React.FC<Props> = ({setScreen}) => {
+
+  const [loaded, setLoaded] = useState<boolean>(false);
+  
   const fonts = {
     'test': require('../fonts/r.ttf'),
   };
@@ -34,7 +39,7 @@ export const HomeScreen = (props) => {
   return (
     <View style={styles.parent}> 
         <Image source={require('../images/logo.jpg')} style={styles.logo}/>     
-        <HomescreenButtons text="Start Game" callback={()=>props.setScreen("play")} />
+        <HomescreenButtons text="Start Game" callback={()=>setScreen("play")} />
         <HomescreenButtons text="Adjust time control" callback={()=>console.log("haha")} />
         <HomescreenButtons text="Settings" callback={()=>console.log("haha")}/>
     </View>
@@ -60,3 +65,5 @@ const styles = StyleSheet.create({
     backgroundColor : "#fff"
   }
 });
+
+export {HomeScreen};
