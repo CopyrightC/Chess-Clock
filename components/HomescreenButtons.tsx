@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-export const HomescreenButtons = (props) => {
+interface Props{
+  text : string;
+  callback : () => void;
+}
+
+const HomescreenButtons:React.FC<Props> = ({
+    text,
+    callback
+  }) => {
+
   return (
-    <TouchableOpacity style={styles.btns} onPress={()=>props.callback()} activeOpacity={1.0}>
-      <Text style={{fontFamily:'test',fontSize:30,color:"#DFCCCF"}}>{props.text}</Text>
+    <TouchableOpacity style={styles.btns} onPress={()=>callback()} activeOpacity={1.0}>
+      <Text style={{fontFamily:'test',fontSize:30,color:"#DFCCCF"}}>{text}</Text>
     </TouchableOpacity>
   );
+
 };
 
 const styles = StyleSheet.create({
@@ -27,3 +37,5 @@ const styles = StyleSheet.create({
     shadowOpacity : 1,
   }
 });
+
+export {HomescreenButtons};
