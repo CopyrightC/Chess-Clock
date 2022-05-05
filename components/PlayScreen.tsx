@@ -10,7 +10,7 @@ const PlayScreen:React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <TimerButton color="black" fontc="white" prun={!run} psetRun={setRun} paused={paused}/>
+      <TimerButton color={!run ? "#FEAC12" : "black"} fontc="white" prun={!run} psetRun={setRun} paused={paused}  oriColor = {"black"}/>
       <TouchableOpacity style={styles.pause} activeOpacity={1.0} onPress={()=>setPaused(!paused)}>
         {
         !paused ?
@@ -19,11 +19,10 @@ const PlayScreen:React.FC = () => {
         <Text style={styles.text}>{`>`}</Text>
         }
       </TouchableOpacity>
-      <TimerButton color="white" fontc="black" prun={run} psetRun={setRun} paused={paused}/>
+      <TimerButton color={run ? "#FEAC12" : "white"} fontc="black" prun={run} psetRun={setRun} paused={paused} oriColor = {"white"}/>
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {

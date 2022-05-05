@@ -7,6 +7,7 @@ interface Props{
   prun : boolean;
   psetRun : React.Dispatch<React.SetStateAction<boolean>>;
   paused : boolean;
+  oriColor : string;
 }
 
 const TimerButton:React.FC<Props> = ({
@@ -14,7 +15,8 @@ const TimerButton:React.FC<Props> = ({
   fontc,
   prun,
   psetRun,
-  paused
+  paused,
+  oriColor
   }) => {
   // alert(props.mins);
   const [hrs, setHrs] = React.useState(0);
@@ -69,7 +71,7 @@ const TimerButton:React.FC<Props> = ({
   };
   const tapped = () => {
     if(!paused){
-      if (color == 'white' && prun) {
+      if (oriColor == 'white' && prun) {
         psetRun(false);
       } else {
         if (prun) psetRun(true);
