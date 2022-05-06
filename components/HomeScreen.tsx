@@ -18,6 +18,7 @@ const HomeScreen:React.FC<Props> = ({setScreen}) => {
   
   const fonts = {
     'test': require('../fonts/r.ttf'),
+    'roboto' : require('../fonts/roboto.ttf')
   };
 
   useEffect(() => {
@@ -41,7 +42,7 @@ const HomeScreen:React.FC<Props> = ({setScreen}) => {
         <Image source={require('../images/logo.jpg')} style={styles.logo}/>     
         <HomescreenButtons text="Start Game" callback={()=>setScreen("play")} />
         <HomescreenButtons text="Adjust time control" callback={()=>console.log("haha")} />
-        <HomescreenButtons text="Settings" callback={()=>console.log("haha")}/>
+        <HomescreenButtons text="Settings" callback={()=>setScreen("time")}/>
     </View>
 
   );

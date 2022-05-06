@@ -19,6 +19,10 @@ const TimerButton:React.FC<Props> = ({
   oriColor
   }) => {
   // alert(props.mins);
+  let deg:string = '0deg';
+  oriColor == 'black' ? deg = '180deg' : {};
+
+
   const [hrs, setHrs] = React.useState(0);
   const [mins, setMins] = React.useState<number | string>(10);
   const [secs, setSecs] = React.useState<number | string>(`02`);
@@ -85,7 +89,12 @@ const TimerButton:React.FC<Props> = ({
     }
   });
   return (
-    <TouchableOpacity style={{ ...styles.timerButton, backgroundColor: `${color}` }} onPress={()=>tapped()} activeOpacity={1.0}>
+    <TouchableOpacity style={
+    {
+     ...styles.timerButton,
+     backgroundColor: `${color}`,
+     transform : [{rotate:`${deg}`}]
+     }} onPress={()=>tapped()} activeOpacity={1.0}>
         <Text style={{ ...styles.timeText, color: `${fontc}` }}>
           {hrs == 0 ? `${mins}:${secs}` : `${hrs}:${mins}:${secs}`}
         </Text>
@@ -101,7 +110,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   timeText: {
-    fontSize: 60,
+    fontSize: 60, 
   },
 });
 
