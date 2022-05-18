@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 // import Constants from 'expo-constants';
-import { HomescreenButtons } from './HomescreenButtons';
+import { HomescreenButtons } from '../HomescreenButtons';
 import { StyleSheet, View, Image, Dimensions,Text } from 'react-native';
 import AppLoading from 'expo-app-loading';
 // import useFonts from './useFonts';
@@ -18,7 +18,8 @@ const HomeScreen:React.FC<Props> = ({setScreen}) => {
   
   const fonts = {
     'test': require('../fonts/r.ttf'),
-    'roboto' : require('../fonts/roboto.ttf')
+    'roboto' : require('../fonts/roboto.ttf'),
+    'robotoMedium' : require('../fonts/robotoMedium.ttf')
   };
 
   useEffect(() => {

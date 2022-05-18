@@ -18,12 +18,11 @@ const TimerButton:React.FC<Props> = ({
   paused,
   oriColor
   }) => {
-  // alert(props.mins);
+
   let deg:string = '0deg';
   oriColor == 'black' ? deg = '180deg' : {};
 
-
-  const [hrs, setHrs] = React.useState(0);
+  const [hrs, setHrs] = React.useState<number>(0);
   const [mins, setMins] = React.useState<number | string>(10);
   const [secs, setSecs] = React.useState<number | string>(`02`);
   const decreaseTime = () => {

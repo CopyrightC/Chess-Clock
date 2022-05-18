@@ -1,20 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { PlayScreen } from './components/PlayScreen';
-import { HomeScreen } from './components/HomeScreen';
-import { Settings } from './components/Settings';
-import { TimeControl } from './components/timeControl';
-import { NewTimeControl } from './components/NewTimeControl';
+import { PlayScreen } from './components/screens/PlayScreen';
+import { HomeScreen } from './components/screens/HomeScreen';
+import { Settings } from './components/screens/Settings';
+import { TimeControl } from './components/time/timeControl';
+import { NewTimeControl } from './components/time/NewTimeControl';
+import { SavedControls } from './components/screens/SavedControls';
 
 const App:React.FC = () => {
 
-  const [screen,setScreen] = React.useState<string>("newTime");
+  const [screen,setScreen] = React.useState<string>("newTime"); 
 
   if(screen == 'home') {return <HomeScreen setScreen = {setScreen}/>}
   else if(screen == 'play') {return <PlayScreen/>}
   else if(screen == 'settings') {return <Settings/>}
   else if(screen == 'time') return <TimeControl/>
   else if(screen == 'newTime') return <NewTimeControl/>
+  else if(screen == 'saved') return <SavedControls/>
 }
 
 export default App;
