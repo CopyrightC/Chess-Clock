@@ -10,7 +10,7 @@ interface Props{
   oriColor : string;
 }
 
-const TimerButton:React.FC<Props> = ({
+const ClockButton:React.FC<Props> = ({
   color,
   fontc,
   prun,
@@ -113,4 +113,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export {TimerButton};
+export {ClockButton};

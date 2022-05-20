@@ -2,7 +2,8 @@ import React from 'react'
 import {View,Text,TouchableOpacity,StyleSheet,TextInput} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Constants from 'expo-constants';
-import { LabelTime } from './label';
+import { LabelTime } from '../time/label';
+
 //custom hook
 import { KeyboardState } from '../hook/keyboardListener';
 
@@ -22,6 +23,7 @@ const NewTimeControl:React.FC = () => {
   If keyboard is closed and if any of the states are single digit numbers, then add a 0
   at the start of it.
   9 -> 09
+  also if any of the values are empty strings then change the value to "00"
   */
 
   if(!isKeyBoardOpen){
@@ -39,6 +41,11 @@ const NewTimeControl:React.FC = () => {
     if(increment.length == 1){
       setIncrement(`0${increment}`)
     }
+
+    if(!hour){setHour("0");}
+    if(!mins){setMins("0");}
+    if(!secs){setSecs("0");}
+    if(!increment){setIncrement("0");}
   }
 
   //Time format interface
@@ -64,13 +71,27 @@ const NewTimeControl:React.FC = () => {
 
     try{
       let customGameType:string;
-      let intMins:number = parseInt(mins);
-
+      let totalTime:number = parseInt(mins) + parseInt(hour)*60;
+      let gameIndex:number;
       //games type determination; check timeInfo.txt for more info
-      if(intMins >= 50){customGameType = "classical";}
-      else if(intMins >= 8){customGameType = "rapid";}
-      else if(intMins >= 3) {customGameType = "blitz"}
-      else if(intMins >= 0) {customGameType = "bullet"}
+      //for total mins -
+      if(totalTime >= 50){customGameType = "classical"; gameIndex = 3;}
+      else if(totalTime >= 8){customGameType = "rapid"; gameIndex = 2;}
+      else if(totalTime >= 3) {customGameType = "blitz"; gameIndex = 1;}
+      else if(totalTime >= 0) {customGameType = "bullet"; gameIndex = 0;}
+
+      //change on basis of increment - 
+      if(parseInt(increment) >= 60){
+        if(gameIndex < 3) {
+         if(gameIndex == 2) {gameIndex++;}
+         else gameIndex+=2;
+        }
+      }
+
+      else if(parseInt(increment) >= 15){
+        if(gameIndex !== 3) {gameIndex++;}
+      }
+
 
       const dataStored: TimeType = {
         hours : hour,
@@ -86,10 +107,11 @@ const NewTimeControl:React.FC = () => {
       if(prevData == null) {prevData = "{}";}
 
       prevData = JSON.parse(prevData);
-      prevData[`${h},${m},${s}`] = dataStored;
+      prevData[`${h},${m},${s},${increment}`] = dataStored;
       prevData  = JSON.stringify(prevData);
 
       await AsyncStorage.setItem("times",prevData);
+      console.log(prevData);
       alert("New time control saved!")
     }
 
@@ -137,7 +159,6 @@ const NewTimeControl:React.FC = () => {
 
   const changeInc = (text:string) =>{
     let newNumber:string = checkForValidChars(text)
-    if(parseInt(newNumber) > 59){newNumber = '59';}
     setIncrement(newNumber);
   }
 
@@ -145,7 +166,7 @@ const NewTimeControl:React.FC = () => {
 
     <View style={styles.parent}>
         {!isKeyBoardOpen ?
-          //only render header if keyboard is closed
+          //render header only if the keyboard is closed
           <Text style={styles.text}>New Time Control</Text>
           :
           <></>
@@ -155,7 +176,7 @@ const NewTimeControl:React.FC = () => {
           <LabelTime label="Hours" value={hour} changeValue={changeHours}/>
           <LabelTime label="Minutes" value={mins} changeValue={changeMins}/>
           <LabelTime label="Seconds" value={secs} changeValue={changeSecs}/>
-          <LabelTime label="Increment" value={increment} changeValue={changeInc}/>
+          <LabelTime label="Increment" value={increment} changeValue={changeInc} maxLength={3}/>
 
           <TouchableOpacity style={styles.saveButton} activeOpacity={1.0} onPress={()=>saveData(hour,mins,secs)}>
             <Text style={styles.saveText}>Save</Text>

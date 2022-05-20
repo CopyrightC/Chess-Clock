@@ -20,10 +20,11 @@ const SavedTime:React.FC<Props> = ({
 
 const styles = StyleSheet.create({
     button : {
-        width : 150,
-        height : 150,
+        width : 310,
+        height : 170,
         backgroundColor : '#638c0c',
         borderRadius : 7,
+        marginBottom : 20,
     },
     timeText : {
         fontSize : 30,

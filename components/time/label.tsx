@@ -5,12 +5,14 @@ interface Props{
   value:string,
   changeValue : React.Dispatch<React.SetStateAction<string>>,
   label : string,
+  maxLength?:number;
 }
 
 const LabelTime:React.FC<Props> = ({
     value,
     changeValue,
-    label
+    label,
+    maxLength
   }) => {
   return (
     <View style={styles.row}>
@@ -20,7 +22,7 @@ const LabelTime:React.FC<Props> = ({
         keyboardType='numeric'
         onChangeText={(text:string)=> changeValue(text)}
         value={value}
-        maxLength={2}
+        maxLength={maxLength ? maxLength : 2}
         />
     </View>
   )

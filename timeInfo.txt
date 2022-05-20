@@ -1,0 +1,10 @@
+mins >= 50 = classical
+mins >= 8 = rapid
+mins >= 3 = blitz
+mins >= 1 = bullet
+
+(seconds)
+inc >= 25 = +1 stage  (bullet,blitz)
+inc >= 120 = +2 stage (bullet,blitz)
+inc >= 300 = +1 stage (rapid)
+
