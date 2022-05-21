@@ -6,7 +6,9 @@ import { SavedTime } from '../time/SavedTime';
 import { TimeControlRow } from '../time/timeControlRow';
 
 const SavedControls:React.FC = () => {
+  
 
+  //images for SavedTime components
   const images = {
       bullet : require("../../images/bullet.png"),
       rapid : require("../../images/rapid.png"),
@@ -16,29 +18,31 @@ const SavedControls:React.FC = () => {
 
   const [timeControls,setTimeControls] = useState<string>("{}");
   const [buttonIndexes,setButtonIndexes] = useState<number[]>([]);
-  const [currentRowCount,setCurrentRowCount] = useState<number>(0);
 
+  //get timeControls from AsyncStorage
   const getTimeControls = async()=>{
     let prevData = await AsyncStorage.getItem("times");
+    console.log("prev",prevData)
     setTimeControls(prevData);
   }
 
+  //on render get the data from AsyncStorage
   useEffect(
-    ()=>{
-        getTimeControls()
-        try{
-            let jsonControls = JSON.parse(timeControls);
-            let indexes:number[] = [];
-            for(let i:number = 0; i < Object.keys(jsonControls).length; i++){
-                indexes.push(i);
-            }
-            setButtonIndexes(indexes)
-            console.log(timeControls);
-        }
-        catch{}
-    }
+    ()=>{getTimeControls()}
   ,[])
   
+
+  useEffect(()=>{
+    try{
+        let jsonControls = JSON.parse(timeControls);
+        let indexes:number[] = [];
+        for(let i:number = 0; i < Object.keys(jsonControls).length; i++){
+            indexes.push(i);
+        }
+        setButtonIndexes(indexes)
+    }
+    catch{}
+  },[timeControls])
 
   return (
     <ScrollView style={styles.parent}>
@@ -50,12 +54,7 @@ const SavedControls:React.FC = () => {
             <SavedTime text="90 + 0" image={images.classical}/>
             {   
                 buttonIndexes.map((i) =>{
-                    if(buttonIndexes.length){
-                        return <TimeControlRow key={i} data={timeControls} indexes={[i]}/>
-                    }
-                    else{
-                        return <></>
-                    }
+                    return <TimeControlRow key={i} data={timeControls} index={i}/>
                 })
             }
         </View>
@@ -76,12 +75,12 @@ const styles = StyleSheet.create({
         textAlign : 'center',
     },
     row :{
-        flexDirection : 'row',
-        justifyContent : 'space-between',
         marginTop : 15,
     },
     buttonsParent : {
         padding : 25,
+        marginBottom:10,
+        alignItems : 'center',
     }
 })
 

@@ -8,7 +8,7 @@ import { SavedControls } from './components/screens/SavedControls';
 
 const App:React.FC = () => {
 
-  const [screen,setScreen] = React.useState<string>("saved"); 
+  const [screen,setScreen] = React.useState<string>("play"); 
 
   if(screen == 'home') {return <HomeScreen setScreen = {setScreen}/>}
   else if(screen == 'play') {return <PlayScreen/>}

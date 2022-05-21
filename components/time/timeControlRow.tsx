@@ -1,15 +1,14 @@
-import React, { useEffect } from 'react'
-import {View,TouchableOpacity,Text,StyleSheet,Image,ScrollView} from 'react-native';
+import React from 'react'
 import { SavedTime } from './SavedTime';
 
 interface props{
     data : string;
-    indexes : number[];
+    index : number;
 }
 
 const TimeControlRow:React.FC<props> = ({
         data,
-        indexes
+        index
     }) => {
     
     const images = {
@@ -18,38 +17,12 @@ const TimeControlRow:React.FC<props> = ({
         blitz : require("../../images/blitz.png"),
         classical : require("../../images/classical.png")
     }
+
     data = JSON.parse(data);
-    let dataKeys = Object.keys(data);
-    let mapKey:number[] = [];
+    let dataKeys:string[] = Object.keys(data);
 
-    for(let i:number = 0; i < dataKeys.length;++i){
-        mapKey.push(i);
-    }
-    try{
-        return(
-            <>
-            {
-                indexes.map((i)=>{
-                    let timeFormat = data[dataKeys[i]];
-                    return <SavedTime text={`${timeFormat["hours"]}:${timeFormat["minutes"]}:${timeFormat["seconds"]} + ${timeFormat["increment"]}`} image={images[timeFormat["gameType"]]} key={i}/>
-                })
-            }
-            </>
-        )
-    }
-    catch{
-        console.log("recdeived");
-        
-        return <></>
-    }
+    let timeFormat = data[dataKeys[index]];
+    return <SavedTime text={`${timeFormat["hours"]}:${timeFormat["minutes"]}:${timeFormat["seconds"]} + ${timeFormat["increment"]}`} image={images[timeFormat["gameType"]]} key={index}/>
 }
-
-const styles = StyleSheet.create({
-    row :{
-        flexDirection : 'row',
-        justifyContent : 'space-between',
-        marginTop : 15,
-    },
-})
 
 export {TimeControlRow};

@@ -22,8 +22,8 @@ const ClockButton:React.FC<Props> = ({
   let deg:string = '0deg';
   oriColor == 'black' ? deg = '180deg' : {};
 
-  const [hrs, setHrs] = React.useState<number>(0);
-  const [mins, setMins] = React.useState<number | string>(10);
+  const [hrs, setHrs] = React.useState<number>(10);
+  const [mins, setMins] = React.useState<number | string>(0);
   const [secs, setSecs] = React.useState<number | string>(`02`);
   const decreaseTime = () => {
 
@@ -31,6 +31,8 @@ const ClockButton:React.FC<Props> = ({
 
     else if (mins == 0 && secs == 0) {
       setHrs(hrs - 1);
+      setMins(59)
+      setSecs(59)
     }
 
     else if (secs == 0) {
