@@ -8,6 +8,9 @@ interface Props{
   psetRun : React.Dispatch<React.SetStateAction<boolean>>;
   paused : boolean;
   oriColor : string;
+  startHours?: number;
+  startMins?: string;
+  startSecs?:string;
 }
 
 const ClockButton:React.FC<Props> = ({

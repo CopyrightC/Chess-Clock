@@ -2,16 +2,16 @@ import React from 'react'
 import {View,Text,StyleSheet, TouchableOpacity} from 'react-native';
 import Constants from 'expo-constants';
 
-const TimeControl:React.FC = () => {
+const TimeControl:React.FC = ({navigation}) => {
 
   return (
     <View style={styles.parent}>
         <Text style={styles.text}>Time Control</Text>
         <View style={styles.buttonsView}>
-            <TouchableOpacity activeOpacity={1.0} style={styles.button}>
+            <TouchableOpacity activeOpacity={1.0} style={styles.button} onPress={()=>navigation.navigate('Saved Time Controls')}>
                 <Text style={styles.btnText}>Saved Time Controls</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} activeOpacity={1.0}>
+            <TouchableOpacity style={styles.button} activeOpacity={1.0} onPress={()=>navigation.navigate('New Time Control')}>
                 <Text style={styles.btnText}>New Time Control</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} activeOpacity={1.0}>

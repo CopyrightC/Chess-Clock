@@ -46,7 +46,6 @@ const SavedControls:React.FC = () => {
 
   return (
     <ScrollView style={styles.parent}>
-        <Text style={styles.text}>Saved Time Controls</Text>
         <View style={styles.buttonsParent}>
             <SavedTime text="1 + 0" image={images.bullet}/>
             <SavedTime text="3 + 0" image={images.blitz}/>

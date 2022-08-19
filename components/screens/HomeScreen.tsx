@@ -12,7 +12,7 @@ interface Props{
   setScreen : React.Dispatch<React.SetStateAction<string>>;
 }
 
-const HomeScreen:React.FC<Props> = ({setScreen}) => {
+const HomeScreen:React.FC<Props> = ({navigation}) => {
 
   const [loaded, setLoaded] = useState<boolean>(false);
   
@@ -41,9 +41,9 @@ const HomeScreen:React.FC<Props> = ({setScreen}) => {
   return (
     <View style={styles.parent}> 
         <Image source={require('../../images/logo.jpg')} style={styles.logo}/>     
-        <HomescreenButtons text="Start Game" callback={()=>setScreen("play")} />
-        <HomescreenButtons text="Adjust time control" callback={()=>console.log("haha")} />
-        <HomescreenButtons text="Settings" callback={()=>setScreen("time")}/>
+        <HomescreenButtons text="Start Game" callback={()=>navigation.navigate('Profile', { name: 'Jane' })} />
+        <HomescreenButtons text="Adjust time control" callback={()=>navigation.navigate('Time Controls')} />
+        <HomescreenButtons text="Settings" callback={()=>navigation.navigate('Settings', { name: 'Jane' })}/>
     </View>
 
   );
